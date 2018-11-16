@@ -1,4 +1,4 @@
-package by.mtis.ui.constant;
+package by.mtis.constants;
 
 /**
  * A collection for REST URLs based on spinal-case (hyphen(-)
@@ -7,10 +7,9 @@ package by.mtis.ui.constant;
 public interface RestApiEndpoints {
     interface Administration {
         String BASE = "/administration";
-
-        String USER_MANAGEMENT = "/user";
-        String GROUP_MANAGEMENT = "/group";
-
+        String USERS = "/users";
+        String GROUPS = "/groups";
+        String PATTERNS = "/templates";
         String CHANGE_PASSWORD = "/chgpwd";
     }
 
@@ -34,10 +33,10 @@ public interface RestApiEndpoints {
         String RECONCILIATION = "/reconciliation";
         String TREE = "/tree";
         String LIST = "/list";
-        String CANCELLED_STATUS = "canceled-status/{id}";
-        String SIGN_STATUS = "/sign/{id}";
-        String ON_CLOSURE_STATUS = "/onclosure/{id}";
-        String CLOSED_STATUS = "/closed/{id}";
+        String CANCELLED_STATUS = "canceled-status";
+        String SIGN_STATUS = "/sign";
+        String ON_CLOSURE_STATUS = "/onclosure";
+        String CLOSED_STATUS = "/closed/";
         String CHANGE = "/change";
         String CARD_HISTORY_SAVE = "/broker-card-history-changes-save";
         String CARD_HISTORY = "/broker-card-history";
@@ -64,28 +63,36 @@ public interface RestApiEndpoints {
         }
     }
 
+    interface Conax {
+        String BASE = "/conax";
+        String SENDFILE = "/{id}";
+    }
+
     interface CommonConfigParam {
         String BASE = "/common";
     }
 
     interface Constructor {
         String BASE = "/constructor";
-
+        String TSC_DISCOUNT = "/tsc-discount";
         String BONUS = "/bonus";
         String DISCOUNT = "/discount";
-        String TARIFF_PLAN = "/tariff-plan";
 
         interface Bonus {
             String ADDING_TP = "/adding-tp";
-            String FIND_BY_ID_VERSIONS = "/versions";
-            String FIND_BY_DATE_VERSION = "/version";
-            String FIND_BY_ID_COMMON = "/common/{id}";
-            String FIND_BY_ID_INITIAL = "/initial/{id}";
-            String FIND_BY_ID_EXTRA = "/extra/{id}";
-            String FIND_BY_ID_STATUS_HISTORY = "/stat-history/{id}";
-            String FIND_BY_ID_PARAM_HISTORY = "/param-history/{id}";
-            String SAVE_STATUS = "/save-status";
-            String SAVE_NULL_VERSION = "/save0";
+            String FIND_BY_ID_VERSION = "/version";
+            String FIND_BY_ID_STATUS_HISTORY = "/status-history/{id}";
+            String FIND_PARAM_HISTORY = "/param-history";
+            String CHANGE_TP_REPORT = "/tp-report";
+            String REPLENISHMENT_REPORT = "/replenish-report";
+            String SERVICE_AMOUNT_REPORT = "/service-report";
+            String ADDITIONAL_TYPE_ID = "/additional-type";
+            String EQUIPMENT_TYPE_ID = "/equipment-type";
+            String GROUP_TYPE_ID = "/group-type";
+            String PERIODICITY_ID_ONETIME = "/period-onetime";
+            String PERIODICITY_ID_MONTHLY = "/period-monthly";
+            String CHECK_TP = "/check-tp";
+            String SET_STATUSES_DELETED = "/bonus-status-deleted";
 
             interface BonusGroup {
                 String BASE = "/group";
@@ -104,22 +111,22 @@ public interface RestApiEndpoints {
             }
         }
 
+        interface ActivationType {
+            String ACTIVATION_TYPE_ID_MANUAL = "/activation-type-manual";
+            String ACTIVATION_TYPE_ID_AUTO = "/activation-type-auto";
+        }
+
         interface Discount {
             String SAVE = "/save";
             String UPDATE_NULL_VERSION = "/discount-null-version";
-            String KIND_DISCOUNT = "/discount-kind";
-            String ACTIVATION_TYPE = "/activation-type";
             String ADD_ADDRESS_DISCOUNT = "/address";
-            String GET_ADDRESS_SHORT = "/address/list";
             String GET_STREET_LIST = "/street/list";
             String GET_STREET_AND_HOUSES_LIST = "/street-and-houses/list";
             String GET_HOUSES_LIST = "/house/list";
             String GET_LINK_STREET_AT_DISCOUNT = "/street/get-link";
             String GET_LINK_HOUSES_AT_DISCOUNT = "/house/get-link";
-            String DISCOUNT_TYPE = "/discount-type";
             String GET_DISCOUNTS = "/discounts";
-            String GET_ADDRESS_DISCOUNT = "/address-discount";
-            String GET_KEYVAL_TP = "/tariff-plan";
+            String GET_DISCOUNTS_ALL = "/discounts-all";
             String SET_DISCOUNT_STATUS_ARCHIVE = "/discount-status-archive";
             String SET_DISCOUNT_STATUS_DELETE = "/discount-status-delete";
             String GET_DISCOUNT_COMMON = "/discount-common";
@@ -133,17 +140,7 @@ public interface RestApiEndpoints {
             String GET_DISCOUNT_STATUS_ACTIV = "/status-activ";
             String GET_DISCOUNT_MEASURE_ID_ABSOLUTE = "/measure-absolute";
             String GET_DISCOUNT_MEASURE_ID_PERCENT = "/measure-percent";
-            String DISCOUNT_ACTIVATION_TYPE_ID_MANUAL = "/discount-activation-manual";
-            String DISCOUNT_ACTIVATION_TYPE_ID_AUTO = "/discount-activation-auto";
-            String DISCOUNT_TYPE_ID_SUBSCRAGE = "/discount-type/subscr-age";
-            String DISCOUNT_TYPE_ID_CHARGES_AMOUNT_ON_SERVICES = "/discount-type/amount-on-services";
-            String DISCOUNT_TYPE_ID_CHARGES_AMOUNT_ON_ACC = "/discount-type/amount-on-acc";
-            String DISCOUNT_TYPE_ID_USE_PERIOD = "/discount-type/use-period";
-            String DISCOUNT_TYPE_ID_TRAFFIC = "/discount-type/traffic";
-            String DISCOUNT_TYPE_ID_SERVICES_COMBINATION = "/discount-type/services-combination";
-            String DISCOUNT_TYPE_ID_ADVANCE_PAYMENT = "/discount-type/advance-payment";
             String DISCOUNT_TYPE_ID_ADDITIONAL = "/discount-type/additional";
-            String DISCOUNT_TYPE_ID_AFFILIATED_SUBSCRS = "/discount-type/affiliated-subscrs";
             String DISCOUNT_ACTIVE_BEGIN_TYPE_ID_FROM_DATE = "/activ-begin/from-date";
             String DISCOUNT_ACTIVE_BEGIN_TYPE_ID_FROM_ACTIVATION = "/activ-begin/from-activation";
             String DISCOUNT_ACTIVE_END_TYPE_ID_TO_DATE = "/activ-begin/to-date";
@@ -151,38 +148,56 @@ public interface RestApiEndpoints {
             String DISCOUNT_ENCUMBRANCE_TERM_TYPE_TO_DATE = "/term-encumbr-type/to-date";
             String DISCOUNT_ENCUMBRANCE_TERM_TYPE_MIN_USE_PERIOD = "/term-encumbr-type/min-use-period";
             String DISCOUNT_TP_LINK_TYPE_ID_FREE_CHANGE = "/tp-link-type-id/free-change";
-            String DISCOUNT_TP_LINK_TYPE_ID_ACCRUAL_SUM = "/tp-link-type-id/accrual-sum";
             String DISCOUNT_TP_LINK_TYPE_ID_APPLY_TO = "/tp-link-type-id/apply-to";
-            String DISCOUNT_TP_LINK_TYPE_ID_TP_MIX = "/tp-link-type-id/tp-mix";
+            String DISCOUNT_HOUSE_REPORT = "/house";
         }
 
-        interface TariffPlan {
-            String ACTIVITY_SUB_TYPES = "/activity-sub-types";
-            String ACTIVITY_TYPES = "/activity-types";
-            String TP_ATV = "/tariff-plans-atv";
-            String BASE_UNITS = "/base-units";
-            String CONNECTION_TYPES = "/connection-types";
-            String CREDIT_LIMIT_TYPES = "/credit-limit-types";
-            String DTV_ACCESS_CRITERIA = "/dtv-access-criteria";
-            String LOCK_LINIT_TYPES = "/lock-limit-types";
-            String FEE_MODES = "/fee-modes";
-            String INET_TARIFFICATION_TYPE = "/internet-tariffication-type";
-            String PAYMENT_TERM_TYPES = "/payment-term-types";
-            String PAYMENT_TYPE = "/payment-type";
-            String PERIOD_MEASURES = "/period-measures";
-            String RESTRICTION_TYPES = "/restriction-types";
-            String SALE_TYPE = "/sale-type";
-            String TARIFFICATION_TYPE = "/tariffication-type";
-            String TV_CHANNELS = "/tv-channels";
-            String TV_PACKAGE_TYPES = "/tv-package-types";
-            String WITHDRAWAL_TYPES = "/withdrawal-types";
+        interface TscDiscount {
+            String FIND_VERSION = "/version";
+            String SET_STATUS_ARCHIVED = "/set-status-archived";
+            String SET_STATUS_DELETED = "/set-status-deleted";
+            String TP_TREE = "/tp-tree";
+            String WORK_KIND = "/work-kind";
+            String TP_TYPE_ID_COMMON = "/type-common";
+            String TP_TYPE_ID_ENCUMBRANCE = "/type-encumbrance";
+        }
+    }
+
+    interface TariffPlan {
+        String BASE = "/tariff-plan";
+        String GOODS = "/goods";
+        String ACTIVITY_SUB_TYPES = "/activity-sub-types";
+        String ACTIVITY_TYPES = "/activity-types";
+        String BASE_UNITS = "/base-units";
+        String CONNECTION_TYPES = "/connection-types";
+        String CREDIT_LIMIT_TYPES = "/credit-limit-types";
+        String DTV_ACCESS_CRITERIA = "/dtv-access-criteria";
+        String LOCK_LIMIT_TYPES = "/lock-limit-types";
+        String FEE_MODES = "/fee-modes";
+        String INET_TARIFFICATION_TYPE = "/internet-tariffication-type";
+        String PAYMENT_TERM_TYPES = "/payment-term-types";
+        String PAYMENT_TYPE = "/payment-type";
+        String PERIOD_MEASURES = "/period-measures";
+        String RESTRICTION_TYPES = "/restriction-types";
+        String SALE_TYPE = "/sale-type";
+        String TARIFFICATION_TYPE = "/tariffication-type";
+        String TV_CHANNELS = "/tv-channels";
+        String TV_PACKAGE_TYPES = "/tv-package-types";
+        String WITHDRAWAL_TYPES = "/withdrawal-types";
+        
+        interface InteractionMatrix {
+            String BASE = "/interaction-matrix";
+            String TP_INTERACTION_TYPES = "/interaction-types";
+            String VERSIONS = "/versions";
         }
     }
 
     interface Contract {
         String BASE = "/contracts";
+        String CREATE = "/create";
+        String CONNECT = "/connect";
+        String DISCONNECT = "/disconnect";
 
-        String COMMON = "/common";
         String MAIN_TARIFF_PLAN = "/tariffplan";
         String ADDITIONAL_TARIFF_PLAN = "/additional-tariffplan";
         String SEARCH_TARIFF_PLAN = "/search-tariff-plan";
@@ -206,11 +221,13 @@ public interface RestApiEndpoints {
         String PENALTY_TYPES = "/penalty-types";
         String FINANCING_SOURCES = "/financing-sources";
         String MEDIATORS = "/mediators";
-        String ACCOUNT_AT_MEDIATOR_BASE = "/account-at-mediator";
+        String ACCOUNT_AT_BROKER_BASE = "/account-at-broker";
         String DOC_TYPES = "/doc-types";
         String DOC_FORMATS = "/doc-formats";
         String BY_PERSONAL_ACCOUNT = "/by-personal-account";
         String STATUS_BAN_EDITING = "/status-ban-editing";
+        String SIGN_ACT_TYPES = "/sign-act-types";
+        String ATV_FILTER = "/atv-filter";
 
         interface Options {
             String BASE = "/options";
@@ -219,6 +236,7 @@ public interface RestApiEndpoints {
             String RENEWED_AGREEMENT = "/renewed-agreement";
             String CHANGES_LIST = "/changes-list";
             String CHANGES = "/changes";
+            String CHANGE = "/change";
             String CLOSING = "/closing";
             String BLOCKING = "/blocking";
             String UNLOCKING = "/unlocking";
@@ -242,37 +260,67 @@ public interface RestApiEndpoints {
         String ADDITIONAL_DATA = "/additional-data";
     }
 
-    interface Jasper{
+    interface Jasper {
         String BASE = "/jasper";
 
         String PRINT_SHIPPING_LIST_PDF = "/print-shipping-list-pdf";
         String PRINT_SHIPPING_LIST_DOC = "/print-shipping-list-doc";
-        String PRINT_SHIPPING_LIST_XLS = "/print-shipping-list-xls";
+        String PRINT_SHIPPING_LIST_XLSX = "/print-shipping-list-xls";
         String LIST_OF_REPORTS = "/list-of-reports";
     }
 
     interface MainData {
         String BASE = "/main-data";
+        String COUNTERPARTY = "/counterparty";
+        String BASIC_TP = "/basic-tp";
+        String STATUSES = "/statuses";
+        String TRAFF_SPEED_MEASURE = "/traff-speed-measures";
+        String TRAFF_VOL_MEASURE = "/traff-vol-measures";
+        String TRAFFIC_RECALC_RULE = "/traffic-recalc-rules";
 
         interface ConfigParams {
             String BASE = "/config-param";
+            String APP_SETTINGS = "/app-settings";
+            String BUSINESS_CONSTANTS = "/business-constants";
+        }
+
+        interface AppealWay {
+            String APPEAL_WAY = "/callcenter-way";
+        }
+
+        interface OperatorProp {
+            String BASE = "/operator-prop";
         }
 
         interface ContractBreak {
             String BASE = "/contract-break";
         }
 
+        interface Dictionary {
+            interface OneFieldDict {
+                String BASE = "/one-field-dict";
+                String STATUS = "/status";
+                String STATUS_ARCHIVE = "/status-archive";
+                String STATUS_ACTIVE = "/status-active";
+
+            }
+        }
+
+        interface Activationtype {
+            String BASE = "/activation-type";
+            String KEY_VAL = "/key-val";
+        }
+
         interface Address {
-            String BASE = "/address";
-            String DISTRICTS = "/districts";
-            String STREETS = "/streets";
-            String STREETS_HOUSES = "/streets-houses";
+            String CITY_DISTRICTS = "/districts";
+            String LOCATED_HOUSES = "/located-houses";
             String STREET_TYPES = "/street-types";
-            String HOUSES = "/houses";
+            String STREETS = "/streets";
             String HOUSE_STATUSES = "/house-statuses";
-            String ROOMS = "/rooms";
             String ROOM_TYPES = "/room-types";
-            String BATCH = "/batch-save";
+            String BATCH = "/batch";
+            String TP_BY_ID = "/tp-by-id";
+            String STATION_TYPES = "/station-types";
         }
 
         interface Discounts {
@@ -284,8 +332,12 @@ public interface RestApiEndpoints {
             String STATUSES = "/statuses";
             String GET_LIST_ACTIVITIES = "/activities";
             String GET_TP_BY_ACTIVITIES = "/activities/tariff-plan";
+            String GET_TP_BY_ACTIVITIES_FOR_CATALOG = "catalog/tariff-plan";
             String GET_TP_TREE_BY_ACTIVITIES = "/activities/tariff-plan/tree";
+            String GET_TP_LIST_DISCOUNT = "/tariff-plan";
             String IS_EXIST_VERSION = "/version_exist";
+            String GET_ADDRESS_HOUSE_LIST = "/address-house";
+            String GET_SUBSCR_SUBGROUP_LIST = "/subscr-subgroup";
         }
 
         interface DefectTV {
@@ -293,21 +345,24 @@ public interface RestApiEndpoints {
 
             interface ChannelFaultClasses {
                 String CHANNEL_CLASSES_FAULT = "/class";
+                String CHANNEL_CLASSES_FAULT_FULL = "/class/full";
                 String GET_CHANNEL_CLASSES_FAULT = "/classes";
             }
 
             interface ChannelFaultCharacteristics {
                 String CHANNEL_CHARACTERISTICS_FAULT = "/characteristic";
+                String CHANNEL_CHARACTERISTICS_FAULT_FULL = "/characteristic/full";
                 String GET_CHANNEL_CHARACTERISTICS_FAULT = "/characteristics";
             }
 
             interface ChannelTypesWorkTroubleshooting {
                 String CHANNEL_TYPE_WORK_TROUBLE = "/types-work";
+                String CHANNEL_TYPE_WORK_TROUBLE_FULL = "/types-work/full";
                 String GET_CHANNEL_TYPE_WORK_TROUBLE = "/types-works";
             }
         }
 
-        interface DocumentTypeForming{
+        interface DocumentTypeForming {
             String BASE = "/document-type-forming";
         }
 
@@ -317,17 +372,17 @@ public interface RestApiEndpoints {
             String GET_FAILURES_CHANNEL = "/failures";
         }
 
-        interface Station {
-            String BASE = "/stations";
-            String STATION_TYPES = "/station-types";
-        }
-
         interface Bank {
             String BASE = "/bank";
+            String BIC = "/bic";
         }
 
         interface CorrectingReasons {
             String BASE = "/correcting-reasons";
+        }
+
+        interface Cashbox {
+            String BASE = "/cashbox";
         }
 
         interface Country {
@@ -370,20 +425,23 @@ public interface RestApiEndpoints {
             String BASE = "/depot";
         }
 
-        interface ReasonsClosingEmergencyOrders {
-            String BASE = "/reasons-closing-emergency-orders";
+        interface CancelReasons {
+            String BASE = "/cancel-reasons";
         }
 
         interface AppealsCategories {
             String BASE = "/appeals-categories";
+            String SET_TO_ARCHIVE = "/set-archive";
         }
 
         interface AppealsChannels {
             String BASE = "/appeals-channels";
+            String SET_TO_ARCHIVE = "/set-archive";
         }
 
         interface ReassonsForAppeals {
             String BASE = "/reasons-for-appeals";
+            String SET_TO_ARCHIVE = "/set-archive";
         }
 
         interface Supplies {
@@ -435,6 +493,13 @@ public interface RestApiEndpoints {
             String BANK_NAME = "/names";
         }
 
+        interface FrpGroup {
+            String BASE = "/frp-group";
+            String EMPLOYEE = "/employee";
+            String EMPLOYEE_WITH_DEPARTMENT = "/employee-with-department";
+            String FRP_EMPLOYEE = "/frp-employee";
+        }
+
         interface PaymentMethod {
             String BASE = "/payment-method";
         }
@@ -443,18 +508,26 @@ public interface RestApiEndpoints {
             String BASE = "/subscriber-categories";
         }
 
+        interface Switch {
+            String BASE = "/switch";
+        }
 
         interface ArrearsReasons {
             String BASE = "/arrears-reasons";
         }
+        interface ActivityKindSubgroup {
+            String BASE = "/activ-kind-subgroup";
+        }
+        interface IpZone {
+            String BASE = "/ipzone";
+        }
+        interface SubscrSubgroup {
+            String BASE = "/subscr-subgroup";
+        }
+        interface SignBasis {
+            String BASE = "/sign-basis";
+        }
 
-        String COUNTERPARTY = "/counterparty";
-
-        String BASIC_TP = "/basic-tp";
-        String STATUSES = "/statuses";
-        String TRAFF_SPEED_MEASURE = "/traff-speed-measures";
-        String TRAFF_VOL_MEASURE = "/traff-vol-measures";
-        String TRAFFIC_RECALC_RULE = "/traffic-recalc-rules";
     }
 
     interface Operation {
@@ -464,12 +537,13 @@ public interface RestApiEndpoints {
          * or by a custom parameter
          */
         String FIND_KEY_VALUE = "/key-value";
-        String FIND_KEY_VALUE_BY_ID = "/key-value/{id}";
         String FIND_HISTORY = "/history";
         String LINK = "/link";
         String SAVE = "/save";
+        String GET_REPORT = "/report";
         String SEARCH = "/search";
         String EXTENDED_SEARCH = "/extended-search";
+        String SET_STATUS = "/set-status";
     }
 
     interface PathParam {
@@ -479,6 +553,7 @@ public interface RestApiEndpoints {
     interface PersonalAccount {
         String BASE = "/personal-account";
         String COMMON_INFO = "/common-info";
+        String HISTORY_PERSONAL_ACCAUNT_OPERATIONS = "/history-personal-account-operations";
 
         interface Type {
             String BASE = "/type";
@@ -541,27 +616,35 @@ public interface RestApiEndpoints {
         String SUBGROUP_TYPES = "/subgroup-types";
         String SUBSCR_STATUS = "/subscr-status";
         String SUBSCR_CATEGORIES = "/subscr-categories";
-
-        String GET_DISCOUNT_BY_FILTER = "/{id}/discounts?{typeId},{name}";
-        String GET_DISCOUNT_BY_TARIFF_PLAN = "/{id}/discounts";
-        String GET_CONNECTED_DISCOUNT_TP = "/{id}/connected-discounts";
-        String ADD_DISCOUNT_TO_TARIFF = "/discount-tariff";
-        String BONUSES_TO_BONUS_ACCOUNT = "/bonus{id}";
-        String UPDATE_LIST_BONUS_FOR_ACCOUNT = "/bonus";
+        String BLOCKING_STATUSES = "/blocking-statuses";
+        String DEPARTMENTS = "/departments";
+        String SUBSCR_GROUPS = "/subscr-groups";
+        String SET_STATUSES_DELETED = "/set-status-deleted";
     }
 
     interface Inventory {
         String BASE = "/inventory";
 
         interface HouseManagement {
-            String BASE = "/house-management";
+            String HOUSE_CONFIGURATOR = "/house-configurator";
+            String ROOM_CONFIGURATOR = "/room-configurator";
+            String TARIFF_PLANS = "/tariff-plans";
+            String SERVICES = "/services";
+        }
 
-            String FIND_TARIFF_PLANS = "/house/{id}/tariff-plans";
+        interface StationManagement {
+            String BASE = "/station-configurator";
+            String LINKED_HOUSES = "/linked-houses";
+            String LINKED_STREETS = "/linked-streets";
+            String AVAILABLE_ACTIVITY_TYPES = "/available-activ-types";
+            String LINKED_ACTIVITY_TYPES = "/linked-activ-types";
         }
     }
 
     interface User {
         String BASE = "/user";
+        String AUTHENTICATION = "/authentication";
+        String LOGOUT = "/logout";
     }
 
     interface FundsTransfer {
@@ -575,6 +658,13 @@ public interface RestApiEndpoints {
         String METHOD = "/method";
         String PRECISION = "precision";
         String RULE = "/rule";
+        String PLANNED = "/planned";
+    }
+
+    interface Debtor {
+        String BASE = "/debtor";
+        String DOC_TYPES = "/doc-types";
+        String DOC_KINDS = "/doc-kinds";
     }
 
     interface PromisedPayment {
@@ -599,6 +689,8 @@ public interface RestApiEndpoints {
             String BASE = "/management";
             String WRITE_OFF = "/write-off";
             String MOVEMENT = "/movement";
+            String DEPRECIATION = "/depreciation";
+            String SET_STATUS_AVAILABLE = "/set-status-available";
         }
     }
 
@@ -608,5 +700,15 @@ public interface RestApiEndpoints {
 
     interface BankStatement {
         String BASE = "/bank-statement";
+        String UPDATE_RECEIPT = "/update-receipt";
+    }
+
+    interface AppealCallCenter {
+        String BASE = "/appeal-call-center";
+        String BY_SUBSCR_ID = "/by-subscr-id";
+    }
+
+    interface Traffic {
+        String BASE = "/traffic-pptp";
     }
 }
