@@ -21,7 +21,7 @@ class Parser {
 
     List<RestClass> parseJavaClasses() {
         List<RestClass> restClasses = new LinkedList<>();
-        File[] folderEntries = new File("D:/Workspace3/JAD/src/main/resources").listFiles();
+        File[] folderEntries = new File("D:/WorkAuxiliary/JAD/src/main/resources").listFiles();
 
         if (folderEntries != null) {
             for (File entry : folderEntries) {

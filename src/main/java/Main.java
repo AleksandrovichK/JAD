@@ -48,7 +48,7 @@ public class Main {
                 tableCell(row2, 2, services.get(i).description);
             }
 
-            FileOutputStream outputStream = new FileOutputStream("D:/Workspace3/JAD/GENERATED DOC/" + restClass.getClassName() + ".docx");
+            FileOutputStream outputStream = new FileOutputStream("D:/WorkAuxiliary/JAD/GENERATED DOC/" + restClass.getClassName() + ".docx");
             docxModel.write(outputStream);
             outputStream.close();
 
